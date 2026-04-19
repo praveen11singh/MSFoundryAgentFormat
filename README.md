@@ -225,8 +225,6 @@ MSFoundryAgentFormat/
 | [MSFoundryEvaluation](https://github.com/praveen11singh/MSFoundryEvaluation) | Agent evaluation with azure-ai-evaluation |
 | [MSFoundryRedTeam](https://github.com/praveen11singh/MSFoundryRedTeam) | Red team jailbreak probing & RAI evaluators |
 | [MSFoundryModelRouter](https://github.com/praveen11singh/MSFoundryModelRouter) | Dynamic multi-model routing |
-| [foundry-langchain](https://github.com/praveen11singh/foundry-langchain) | LangChain & LangGraph integration |
-| [foundry-mcp-agent](https://github.com/praveen11singh/foundry-mcp-agent) | Model Context Protocol (MCP) agent |
 | **MSFoundryAgentFormat** | Agent response format patterns ← you are here |
 
 ---
@@ -234,5 +232,5 @@ MSFoundryAgentFormat/
 ## Author
 
 **Praveen Kumar**
-Azure Solutions Architect & AI Engineer · Associate Consultant @ TCS
+Azure Solutions Architect & AI Architect 
 [LinkedIn]([https://www.linkedin.com/in/praveen11singh](https://www.linkedin.com/in/praveen-kumar-b52a1a1a0/)) · [GitHub](https://github.com/praveen11singh) 
