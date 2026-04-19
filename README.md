@@ -231,6 +231,6 @@ MSFoundryAgentFormat/
 
 ## Author
 
-**Praveen Kumar**
-Azure Solutions Architect & AI Architect 
-[LinkedIn]([https://www.linkedin.com/in/praveen11singh](https://www.linkedin.com/in/praveen-kumar-b52a1a1a0/)) · [GitHub](https://github.com/praveen11singh) 
+**Praveen Kumar,Azure Solutions Architect & AI Architect **
+- [GitHub](https://github.com/praveen11singh/)
+- [LinkedIn](https://www.linkedin.com/in/praveen-kumar-b52a1a1a0/)
