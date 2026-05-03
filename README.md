@@ -77,7 +77,7 @@ cp .env.example .env
 
 ```env
 # .env
-PROJECT_CONNECTION_STRING=<your-foundry-project-connection-string>
+PROJECT_ENDPOINT=<your-foundry-project-endpoint>
 MODEL_DEPLOYMENT_NAME=<your-model-deployment-name>
 ```
 
@@ -98,6 +98,23 @@ python agents_json_schema_response_format.py
 # Pydantic-derived schema
 python agents_json_schema_response_format_using_pydantic.py
 ```
+
+---
+
+## Project Structure
+
+- `agents_*.py` — Main scripts demonstrating different response format patterns
+- `utils/` — Utility functions for agent operations, including telemetry and function calling helpers
+- `assets/` — Sample data files for testing and evaluation, including JSON schemas, CSV data, and API specifications
+- `requirements.txt` — Python dependencies
+- `.env.example` — Environment variable template
+
+---
+
+## Additional Resources
+
+- [Azure AI Foundry Documentation](https://learn.microsoft.com/en-us/azure/ai-studio/)
+- [Azure AI Agents SDK](https://pypi.org/project/azure-ai-projects/)
 
 ---
 
