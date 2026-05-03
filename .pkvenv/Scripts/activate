@@ -35,7 +35,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\MSPython\multi\MSFoundryAgentFormat\.pkvenv"
+VIRTUAL_ENV="C:\MSPython\agent formate\MSFoundryAgentFormat\.pkvenv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

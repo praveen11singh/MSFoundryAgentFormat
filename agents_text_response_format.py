@@ -1,19 +1,19 @@
 import os
-from azure.ai.projects import AIProjectClient
 from azure.identity import DefaultAzureCredential
+from azure.ai.agents import AgentsClient
 from azure.ai.agents.models import ListSortOrder, AgentsResponseFormat, RunStatus
 
 from dotenv import load_dotenv
 
 load_dotenv()
 
-project_client = AIProjectClient(
+# Use AgentsClient directly — NOT AIProjectClient
+agents_client = AgentsClient(
     endpoint=os.environ["PROJECT_ENDPOINT"],
     credential=DefaultAzureCredential(),
 )
 
-with project_client:
-    agents_client = project_client.agents
+with agents_client:
 
     agent = agents_client.create_agent(
         model=os.environ["MODEL_DEPLOYMENT_NAME"],

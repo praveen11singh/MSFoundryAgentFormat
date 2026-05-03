@@ -1,8 +1,8 @@
 import os
 import json
 from typing import Dict, Any
-from azure.ai.projects import AIProjectClient
 from azure.identity import DefaultAzureCredential
+from azure.ai.agents import AgentsClient
 from azure.ai.agents.models import (
     ListSortOrder,
     MessageRole,
@@ -15,8 +15,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Defines a JSON schema for listing Solar System planets and their masses. We would like the AI model to respond in this format.
-# See `sample_agents_json_schema_response_format_using_pydantic.py` for an alternative way to define the schema using Pydantic.
 json_schema: Dict[str, Any] = {
     "$defs": {
         "PlanetName": {
@@ -41,7 +39,7 @@ json_schema: Dict[str, Any] = {
                     },
                     "relative_mass": {
                         "type": "number",
-                        "description": "Relative mass of the planet compared to Earth (for example, a value of 2.0 means the planet is twice as massive as Earth)",
+                        "description": "Relative mass of the planet compared to Earth",
                     },
                 },
                 "required": ["name", "mass"],
@@ -53,14 +51,13 @@ json_schema: Dict[str, Any] = {
     "additionalProperties": False,
 }
 
-
-project_client = AIProjectClient(
+# Use AgentsClient directly — NOT AIProjectClient
+agents_client = AgentsClient(
     endpoint=os.environ["PROJECT_ENDPOINT"],
     credential=DefaultAzureCredential(),
 )
 
-with project_client:
-    agents_client = project_client.agents
+with agents_client:
 
     agent = agents_client.create_agent(
         model=os.environ["MODEL_DEPLOYMENT_NAME"],
@@ -99,7 +96,6 @@ with project_client:
         if msg.text_messages:
             last_text = msg.text_messages[-1]
             print(f"{msg.role}: {last_text.text.value}")
-            # Convert the Agent's JSON response message to a Dict object, extract and print planet masses
             if msg.role == MessageRole.AGENT:
                 response_dict = json.loads(last_text.text.value)
                 for planet in response_dict["planets"]:

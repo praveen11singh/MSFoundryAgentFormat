@@ -1,8 +1,8 @@
 import os
 from enum import Enum
 from pydantic import BaseModel, TypeAdapter
-from azure.ai.projects import AIProjectClient
 from azure.identity import DefaultAzureCredential
+from azure.ai.agents import AgentsClient
 from azure.ai.agents.models import (
     ListSortOrder,
     MessageRole,
@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-# Create the pydantic model to represent the planet names and there masses.
+# Create the pydantic model to represent the planet names and their masses.
 class PlanetName(str, Enum):
     Mercury = "Mercury"
     Venus = "Venus"
@@ -37,13 +37,13 @@ class Planets(BaseModel):
     planets: list[Planet]
 
 
-project_client = AIProjectClient(
+# Use AgentsClient directly — NOT AIProjectClient
+agents_client = AgentsClient(
     endpoint=os.environ["PROJECT_ENDPOINT"],
     credential=DefaultAzureCredential(),
 )
 
-with project_client:
-    agents_client = project_client.agents
+with agents_client:
 
     agent = agents_client.create_agent(
         model=os.environ["MODEL_DEPLOYMENT_NAME"],
@@ -73,17 +73,3 @@ with project_client:
 
     if run.status != RunStatus.COMPLETED:
         print(f"The run did not succeed: {run.status=}.")
-
-    agents_client.delete_agent(agent.id)
-    print("Deleted agent")
-
-    messages = agents_client.messages.list(thread_id=thread.id, order=ListSortOrder.ASCENDING)
-    for msg in messages:
-        if msg.text_messages:
-            last_text = msg.text_messages[-1]
-            print(f"{msg.role}: {last_text.text.value}")
-            # Deserialize the Agent's JSON response to the `Planets` class defined above
-            if msg.role == MessageRole.AGENT:
-                planets = TypeAdapter(Planets).validate_json(last_text.text.value)
-                for planet in planets.planets:
-                    print(f"The mass of {planet.name.value} is {planet.mass} kg.")
